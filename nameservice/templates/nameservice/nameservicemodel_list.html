@@ -1,0 +1,50 @@
+{% extends "nameservice/base.html"%}
+
+{% block content %}
+<table class="table table-hover">
+    <thead>
+        <tr class="table-primary">
+            <th scope="col">Name</th>
+            <th scope="col">Skylink</th>
+            <th scope="col">Description</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for ns in object_list %}
+        <tr>
+            <td><a href="{% url 'nsDetail' ns.id %}"> {{ ns.name }} </a></td>
+            <td>{{ns.skylink}}</td>
+            <td>{{ns.description}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<!-- Pagination -->
+<div class="container">
+    {% if is_paginated %}
+    {% if page_obj.has_other_pages %}
+    <ul class="pagination justify-content-center" style="margin:20px 0">
+        {% if page_obj.has_previous %}
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+        {% else %}
+        <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+        {% endif %}
+        {% for i in page_obj.paginator.page_range %}
+        {% if page_obj.number == i %}
+        <li class="page-item active"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+        {% else %}
+        <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+        {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+        {% else %}
+        <li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+        {% endif %}
+    </ul>
+    {% endif %}
+    {% endif %}
+</div>
+{% endblock content %}

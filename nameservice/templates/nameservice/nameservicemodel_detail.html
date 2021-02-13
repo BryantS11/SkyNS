@@ -1,0 +1,27 @@
+{% extends 'nameservice/base.html' %}
+
+{% block content %}
+<div class="row">
+    <h3>Name: {{object.name}}</h3>
+    <h3>Skylink: {{object.skylink}}</h3>
+    <h3>Description: {{object.description}}</h3>
+</div>
+<hr class="mt-2" />
+
+<div class="row mt-2">
+    {% if request.user == object.user %}
+    <div class="col">
+        <button class="btn btn-outline-info float-left">
+            <a href="{% url 'nsUpdate' object.id %}" class="text-decoration-none ">Update</a>
+        </button>
+    </div>
+
+    <div class="col">
+        <button class="btn btn-outline-danger float-end">
+            <a href="{% url 'nsDelete' object.id %}" class="text-decoration-none">Delete</a>
+        </button>
+    </div>
+    {% endif %}
+</div>
+
+{% endblock content %}

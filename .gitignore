@@ -1,0 +1,10 @@
+# Text backup files
+*.bak
+
+# Database
+*.sqlite3
+
+# pyc
+*.pyc
+
+.vscode/

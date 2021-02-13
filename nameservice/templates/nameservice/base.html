@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkyNS - {% block title %}{% endblock title %}</title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    </script>
+
+</head>
+
+<body>
+    <div class="bg-success">
+        <div class="jumbotron text-center">
+            <h1 style="text-shadow: 2px 2px 0px #ffffff;">SkyNS</h1>
+            <p>Skylink Database for Resolving on Skynet</p>
+        </div>
+
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand text-success" href="{% url 'home' %}">SkyNS</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+                        </li>
+                    </ul>
+                    <div class="d-flex flex-row">
+                        {% if user.is_authenticated %}
+
+                        <div style="margin-right:20px;">
+                            <span class="text-muted">Username:</span>
+                            <span class="text-white">{{user.username}}</span>
+                        </div>
+
+                        <div style="margin-right:20px;">
+                            <a class="text-info text-decoration-none" href="{% url 'nsList' %}">My SkyNS</a>
+                        </div>
+
+                        <div>
+                            <a class="text-danger text-decoration-none" href="{% url 'logout' %}">Logout</a>
+                        </div>
+
+                        {% else %}
+                        <div>
+                            <a class="nav-link" href="{% url 'login' %}">Login</a>
+                        </div>
+
+                        <div>
+                            <a class="nav-link" href="{% url 'register' %}">Register</a>
+                        </div>
+
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+
+    <div class="h-100 w-100">
+        <div class="container">
+            {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                <h1{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</h1>
+                    {% endfor %}
+            </div>
+            {% endif %}
+
+            <div class="mt-3">
+                {% block content %}{% endblock content %}
+            </div>
+
+        </div>
+
+        <div class="jumbotron text-center fixed-bottom bg-dark text-white" style="margin-bottom:0">
+            <p>SkyNS</p>
+        </div>
+
+    </div>
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+web: gunicorn skyns.wsgi --log-file -
