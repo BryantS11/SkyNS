@@ -1,6 +1,14 @@
 {% extends "nameservice/base.html"%}
 
 {% block content %}
+{% if user.is_authenticated %}
+<div >
+    <button class="btn btn-outline-success float-end mb-3">
+        <a href="{% url 'nsCreate' %}" class="text-decoration-none "><i class="fas fa-plus"></i> Create NS</a>
+    </button>
+</div>
+{% endif %}
+
 <table class="table table-hover">
     <thead>
         <tr class="table-primary">
