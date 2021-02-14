@@ -44,10 +44,12 @@ INSTALLED_APPS = [
     'api.apps.ApiConfig',  # Mine
     'crispy_forms',  # Crispy
     'rest_framework', # DRF
+    'corsheaders', # CORS
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware', # CORS
     'whitenoise.middleware.WhiteNoiseMiddleware',  # White Noise
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -56,6 +58,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+CORS_ORIGIN_ALLOW_ALL = True
 
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
