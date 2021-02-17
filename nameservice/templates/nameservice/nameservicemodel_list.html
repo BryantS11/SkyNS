@@ -2,7 +2,7 @@
 
 {% block content %}
 {% if user.is_authenticated %}
-<div >
+<div>
     <button class="btn btn-outline-success float-end mb-3">
         <a href="{% url 'nsCreate' %}" class="text-decoration-none "><i class="fas fa-plus"></i> Create NS</a>
     </button>
@@ -22,7 +22,11 @@
         {% for ns in object_list %}
         <tr>
             <td><a href="{% url 'nsDetail' ns.id %}"> {{ ns.name }} </a></td>
-            <td>{{ns.skylink}}</td>
+            <td>{{ns.skylink}} &emsp;
+                <a href="{{user.user_portal.portal.url}}{{ns.skylink}}">
+                    <i class="fas fa-external-link-alt"></i>
+                </a>
+            </td>
             <td>{{ns.description}}</td>
         </tr>
         {% endfor %}

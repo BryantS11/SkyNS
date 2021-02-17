@@ -1,7 +1,7 @@
 from django.shortcuts import render, reverse
 from django.views.generic import CreateView, ListView, UpdateView, DetailView, DeleteView  # CRUD + Detail
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin  # Permissions
-from nameservice.models import NameServiceModel  # Model
+from nameservice.models import NameServiceModel, UserPortalModel # Model
 from django.contrib.messages.views import SuccessMessageMixin  # Messages
 # Create your views here.
 
@@ -66,3 +66,22 @@ class SkyNSDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     
     def get_success_url(self):
         return reverse('nsList')
+
+# Portals
+class UserPortalUpdateView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, UpdateView):
+    model = UserPortalModel
+    fields = ['portal']
+    success_message = "Default Portal was updated successfully"
+
+    def form_valid(self, form):  # logged in user is updating
+        form.instance.user = self.request.user
+        return super().form_valid(form)  # parent class will run form_valid
+
+    def test_func(self):  # UserPassesTest denies other users from updating others forms
+        portal = self.get_object()  # get NS
+        if self.request.user == portal.user:  # if logged-in user is creator return true
+            return True
+        return False
+
+    def get_success_url(self):
+        return reverse('home')

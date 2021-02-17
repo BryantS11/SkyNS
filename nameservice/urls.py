@@ -9,4 +9,5 @@ urlpatterns = [
     path("update/<int:pk>", views.SkyNSUpdateView.as_view(), name="nsUpdate"),
     path("detail/<int:pk>", views.SkyNSDetailView.as_view(), name="nsDetail"),
     path("delete/<int:pk>", views.SkyNSDeleteView.as_view(), name="nsDelete"),
+    path("<int:pk>/profile", views.UserPortalUpdateView.as_view(), name="profile"),
 ]

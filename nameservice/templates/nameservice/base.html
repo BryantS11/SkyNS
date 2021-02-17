@@ -39,7 +39,9 @@
 
                         <div style="margin-right:20px;">
                             <span class="text-muted">Username:</span>
-                            <span class="text-white">{{user.username}}</span>
+                            <span class="text-white">
+                                <a class="text-info text-decoration-none" href="{% url 'profile' user.user_portal.id %}">{{user.username}}</a>
+                            </span>
                         </div>
 
                         <div style="margin-right:20px;">
