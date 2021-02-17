@@ -23,9 +23,16 @@
         <tr>
             <td><a href="{% url 'nsDetail' ns.id %}"> {{ ns.name }} </a></td>
             <td>{{ns.skylink}} &emsp;
+                {% if user.is_authenticated %}
                 <a href="{{user.user_portal.portal.url}}{{ns.skylink}}">
                     <i class="fas fa-external-link-alt"></i>
                 </a>
+                {% else %}
+                <a href="https://siasky.net/{{ns.skylink}}">
+                    <i class="fas fa-external-link-alt"></i>
+                </a>
+                {% endif %}
+
             </td>
             <td>{{ns.description}}</td>
         </tr>
