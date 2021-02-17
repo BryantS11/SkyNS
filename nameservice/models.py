@@ -37,7 +37,7 @@ class UserPortalModel(models.Model):
         verbose_name_plural = ("User Portal")
     
     user =  models.OneToOneField(User, on_delete=models.CASCADE, related_name="user_portal")
-    portal = models.OneToOneField(PortalModel, on_delete=models.CASCADE, related_name="portal", help_text="Select Default Portal")
+    portal = models.ForeignKey(PortalModel, on_delete=models.CASCADE, related_name="portal", help_text="Select Default Portal")
 
     def __str__(self):
         return f"{self.user.username}'s Default Portal"
